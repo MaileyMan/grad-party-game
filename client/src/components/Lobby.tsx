@@ -3,7 +3,7 @@ import { Carousel } from '.'
 import { jsonMessages, LobbyProps } from '@/types'
 import useWebSocket from "react-use-websocket";
 
-const Lobby = ({ username, setJoined, setStarted }: LobbyProps) => {
+const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
   const WS_URL = 'ws://127.0.0.1:8000'
 
   const { sendJsonMessage, lastJsonMessage }: jsonMessages = useWebSocket(WS_URL, {
@@ -16,11 +16,16 @@ const Lobby = ({ username, setJoined, setStarted }: LobbyProps) => {
     sendJsonMessage({
       start: true
     })
-    setStarted(true)
   }
 
   const leaveGame = () => {
     setJoined(false)
+  }
+
+  const onStart = () => {
+    setConnected(false)
+    setTarget(lastJsonMessage.target.username)
+    setStarted(true)
   }
 
   useEffect(() => {
@@ -31,7 +36,7 @@ const Lobby = ({ username, setJoined, setStarted }: LobbyProps) => {
     setConnected(true);
 
     if (lastJsonMessage.started) {
-
+      onStart()
     }
   }, [lastJsonMessage])
 
@@ -40,7 +45,7 @@ const Lobby = ({ username, setJoined, setStarted }: LobbyProps) => {
       {connected
         ? (<>
           <p>{`Hello, ${username}`}</p>
-          {connected && <Carousel players={lastJsonMessage.players} />}
+          {lastJsonMessage.players && <Carousel players={lastJsonMessage.players} />}
           <div className='flex gap-2'>
             <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={startGame}>Start game</button>
             <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={leaveGame}>Leave game</button>

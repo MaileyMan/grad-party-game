@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { Login, Lobby } from "../components";
+import { Login, Lobby, Target } from "../components";
 
 export default function Home() {
   const [username, setUsername] = useState("")
@@ -13,7 +13,9 @@ export default function Home() {
     <main>
       {
         joined
-          ? <Lobby username={username} setJoined={setJoined} setStarted={setStarted} />
+          ? (started
+            ? <Target username={username} target={target} setJoined={setJoined} setStarted={setStarted} />
+            : <Lobby username={username} setJoined={setJoined} setStarted={setStarted} setTarget={setTarget} />)
           : <Login username={username} setUsername={setUsername} setJoined={setJoined} />
       }
     </main>

@@ -15,8 +15,6 @@ export default function EmblaCarousel({ players }: CarouselProps) {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
-  const player = players[0]
-
   return (
     <div>
       <div className="overflow-hidden" ref={emblaRef}>

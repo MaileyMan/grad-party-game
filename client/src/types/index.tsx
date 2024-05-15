@@ -11,6 +11,14 @@ export interface LobbyProps {
   username: string;
   setJoined: React.Dispatch<SetStateAction<boolean>>;
   setStarted: React.Dispatch<SetStateAction<boolean>>;
+  setTarget: React.Dispatch<SetStateAction<string>>;
+}
+
+export interface TargetProps {
+  username: string;
+  target: string;
+  setJoined: React.Dispatch<SetStateAction<boolean>>;
+  setStarted: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface CarouselProps {
