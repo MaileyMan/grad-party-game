@@ -17,7 +17,7 @@ const broadcastPlayers = () => {
     const connection = connections[uuid]
     const message = JSON.stringify({
       started: started,
-      players: users
+      players: Object.values(users)
     })
     connection.send(message)
   })
@@ -94,6 +94,8 @@ wsServer.on("connection", (connection, request) => {
     username,
     state: {}
   }
+
+  broadcastPlayers()
 
   connection.on("message", message => handleMessage(message, uuid))
   connection.on("close", () => handleClose(uuid))
