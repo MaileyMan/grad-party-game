@@ -17,12 +17,13 @@ export default function EmblaCarousel({ players }: CarouselProps) {
 
   return (
     <div>
-      <div className="overflow-hidden" ref={emblaRef}>
+      <p className='text-gray-700 font-light text-center text-sm'>Players in lobby {`(${players.length})`}:</p>
+      <div className="overflow-hidden mt-1" ref={emblaRef}>
         <div className="flex gap-x-2">
           {
             players.map((player, i) => (
               <div key={i}
-                className="min-w-0 h-24 rounded-md bg-slate-600 content-center text-center"
+                className="min-w-0 h-24 rounded-md bg-slate-600 content-center text-center font-bold text-lg"
                 style={{ flex: "0 0 100%" }}
               >
                 {player.username}
@@ -31,10 +32,10 @@ export default function EmblaCarousel({ players }: CarouselProps) {
         </div>
       </div>
       <div className='flex mt-2 justify-center space-x-2'>
-        <button className="min-w-16 bg-slate-500 rounded-full p-2" onClick={scrollPrev}>
+        <button className="min-w-16 bg-slate-500 rounded-full p-2 text-sm" onClick={scrollPrev}>
           Prev
         </button>
-        <button className="min-w-16 bg-slate-500 rounded-full p-2" onClick={scrollNext}>
+        <button className="min-w-16 bg-slate-500 rounded-full p-2 text-sm" onClick={scrollNext}>
           Next
         </button>
       </div>

@@ -27,6 +27,7 @@ export interface CarouselProps {
 
 export interface webSocketResponse {
   started: boolean;
+  finished: boolean;
   players: player[];
   target: player;
 }

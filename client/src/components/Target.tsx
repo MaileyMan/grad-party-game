@@ -8,10 +8,15 @@ const Target = ({ username, target, setJoined, setStarted }: TargetProps) => {
   }
 
   return (
-    <div className='flex min-h-screen flex-col items-center p-24 gap-y-4'>
-      <div>{`${username}, your target is ${target}.`}</div>
-      <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={newGame}>New game</button>
-    </div>
+    <>
+      <div className='text-gray-700 font-bold'>{`${username}, your target is ${target}.`}</div>
+      <button className="flex bg-white p-2 rounded-md shadow-xl" onClick={newGame}>
+        <div className='flex items-center gap-x-1'>
+          <p className='text-md text-gray-700 font-light align-middle'>New game</p>
+          <img src='/play_arrow.svg' width={25} />
+        </div>
+      </button>
+    </>
   )
 }
 

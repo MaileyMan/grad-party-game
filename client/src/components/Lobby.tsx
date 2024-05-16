@@ -7,10 +7,12 @@ const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
   const WS_URL = 'ws://127.0.0.1:8000'
 
   const { sendJsonMessage, lastJsonMessage }: jsonMessages = useWebSocket(WS_URL, {
-    queryParams: { username }
+    queryParams: { username },
+    onClose: () => onDisconnect()
   })
 
   const [connected, setConnected] = useState(false)
+  const [message, setMessage] = useState("")
 
   const startGame = () => {
     sendJsonMessage({
@@ -28,8 +30,17 @@ const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
     setStarted(true)
   }
 
+  const onDisconnect = () => {
+    setConnected(false)
+  }
+
   useEffect(() => {
     if (!lastJsonMessage) {
+      setMessage("Could not connect to server.")
+      return
+    }
+    else if (lastJsonMessage.finished) {
+      setMessage("Server is resetting.")
       return
     }
 
@@ -41,19 +52,39 @@ const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
   }, [lastJsonMessage])
 
   return (
-    <div className='flex min-h-screen flex-col items-center p-24 gap-y-4'>
+    <>
       {connected
         ? (<>
-          <p>{`Hello, ${username}`}</p>
+          <p className='font-bold text-gray-700'>{`Hello, ${username}.`}</p>
           {lastJsonMessage.players && <Carousel players={lastJsonMessage.players} />}
-          <div className='flex gap-2'>
-            <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={startGame}>Start game</button>
-            <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={leaveGame}>Leave game</button>
+          <div className='mt-4 flex gap-2'>
+            <button className="flex bg-white p-2 rounded-md shadow-xl" onClick={startGame}>
+              <div className='flex items-center gap-x-1'>
+                <p className='text-md text-gray-700 font-light align-middle'>Start game</p>
+                <img src='/play_arrow.svg' width={25} />
+              </div>
+            </button>
+            <button className="flex bg-white p-2 rounded-md shadow-xl" onClick={leaveGame}>
+              <div className='flex items-center gap-x-1'>
+                <p className='text-md text-gray-700 font-light align-middle'>Leave game</p>
+                <img src='/play_arrow.svg' width={25} />
+              </div>
+            </button>
           </div>
         </>)
-        : <button className="w-48 h-16 bg-slate-800 rounded-md" onClick={leaveGame}>Leave game</button>
+        : (<>
+          <p className='text-gray-700 font-bold'>{message}</p>
+          <div className='flex justify-center'>
+            <button className="flex grow-0 shrink min-w-0 bg-white p-2 rounded-md shadow-xl" onClick={leaveGame}>
+              <div className='flex items-center gap-x-1'>
+                <p className='text-md text-gray-700 font-light align-middle'>Leave game</p>
+                <img src='/play_arrow.svg' width={25} />
+              </div>
+            </button>
+          </div>
+        </>)
       }
-    </div>
+    </>
   )
 }
 
