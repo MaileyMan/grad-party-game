@@ -11,12 +11,14 @@ const port = 8000
 const connections = {}
 const users = {}
 let started = false
+let finished = false
 
 const broadcastPlayers = () => {
   Object.keys(connections).forEach(uuid => {
     const connection = connections[uuid]
     const message = JSON.stringify({
       started: started,
+      finished: finished,
       players: Object.values(users)
     })
     connection.send(message)
@@ -67,6 +69,9 @@ const broadcastStart = () => {
 }
 
 const timeoutServer = () => {
+  started = false
+  finished = true
+
   setTimeout(() => {
     clearServer()
   }, 10000)
@@ -77,7 +82,7 @@ const clearServer = () => {
     connection.close()
   })
 
-  started = false
+  finished = false
 
   console.log('Server has been cleared')
 }
