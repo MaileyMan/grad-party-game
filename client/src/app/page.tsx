@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Login, Lobby, Target } from "../components";
+import { bowlby_one_sc } from "@/utils";
 
 export default function Home() {
   const [username, setUsername] = useState("")
@@ -9,12 +10,22 @@ export default function Home() {
   const [joined, setJoined] = useState(false)
   const [started, setStarted] = useState(false)
 
+  const gradient = {
+    normal: "flex min-h-screen justify-center bg-gradient-to-b to-green-300 from-green-100 transition-all duration-150",
+    target: "flex min-h-screen justify-center bg-gradient-to-b to-red-300 from-white transition-all duration-150"
+  }
+
+  const container = {
+    normal: "flex flex-col items-center mx-6 pb-16 pt-12 gap-y-4 rounded-xl bg-green-100 shadow-lg transition-all duration-150",
+    target: "flex flex-col items-center mx-6 pb-16 pt-12 gap-y-4 rounded-xl bg-red-100 shadow-lg transition-all duration-150"
+  }
+
   return (
     <main>
-      <div className='flex min-h-screen justify-center bg-gradient-to-b to-green-300 from-green-100'>
-        <div className='flex flex-col gap-4 justify-center'>
-          <h1 className='text-center text-5xl font-bold text-gray-600'>Card Assassins</h1>
-          <div className="flex flex-col items-center p-24 pb-16 pt-12 gap-y-4 rounded-xl bg-green-100 shadow-lg">
+      <div className={started ? gradient.target : gradient.normal}>
+        <div className='flex grow flex-col gap-4 justify-center'>
+        <h1 className={`${bowlby_one_sc.className} text-center text-5xl font-bold text-gray-600`}>Card Assassins</h1>
+          <div className={started ? container.target : container.normal}>
             {
               joined
                 ? (started
@@ -23,7 +34,7 @@ export default function Home() {
                 : <Login username={username} setUsername={setUsername} setJoined={setJoined} />
             }
           </div>
-          <h1 className='text-center font-bold text-gray-600'>Grad Party 2024</h1>
+          <h1 className={`${bowlby_one_sc.className} text-center text-gray-600 font-medium`}>Grad Party 2024</h1>
         </div>
       </div>
     </main>

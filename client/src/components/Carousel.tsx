@@ -3,6 +3,7 @@
 import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { CarouselProps } from '@/types'
+import { bowlby_one_sc } from '@/utils'
 
 export default function EmblaCarousel({ players }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel()
@@ -17,13 +18,13 @@ export default function EmblaCarousel({ players }: CarouselProps) {
 
   return (
     <div>
-      <p className='text-gray-700 font-light text-center text-sm'>Players in lobby {`(${players.length})`}:</p>
+      <p className='text-gray-700 font-medium text-center text-sm'>Players in lobby {`(${players.length})`}:</p>
       <div className="overflow-hidden mt-1" ref={emblaRef}>
         <div className="flex gap-x-2">
           {
             players.map((player, i) => (
               <div key={i}
-                className="min-w-0 h-24 rounded-md bg-slate-600 content-center text-center font-bold text-lg"
+                className={`${bowlby_one_sc.className} min-w-0 h-24 rounded-md bg-slate-600 content-center text-center font-bold text-lg`}
                 style={{ flex: "0 0 100%" }}
               >
                 {player.username}
