@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid"
 
 const server = createServer()
 const wsServer = new WebSocketServer({ server })
-const port = 8000
+const port = 80
 
 const connections = {}
 const users = {}

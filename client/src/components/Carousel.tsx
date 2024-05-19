@@ -1,27 +1,25 @@
 "use client"
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { CarouselProps } from '@/types'
-import { bowlby_one_sc } from '@/utils'
+import { bowlby_one_sc, usePrevNextButtons } from '@/utils'
 
 export default function EmblaCarousel({ players }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel()
-  const [index, setIndex] = useState(0)
 
   const scrollPrev = useCallback(() => {
-    if (emblaApi) {
-      emblaApi.scrollPrev()
-      setIndex(i => i - 1)
-    }
+    if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
 
   const scrollNext = useCallback(() => {
-    if (emblaApi) {
-      emblaApi.scrollNext()
-      setIndex(i => i + 1)
-    }
+    if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
+
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled
+  } = usePrevNextButtons(emblaApi)
 
   const button = {
     enabled: "min-w-16 bg-slate-500 rounded-full p-2 text-sm",
@@ -47,16 +45,16 @@ export default function EmblaCarousel({ players }: CarouselProps) {
       </div>
       <div className='flex mt-2 justify-center space-x-2'>
         <button
-          className={index == 0 ? button.disabled : button.enabled}
+          className={prevBtnDisabled ? button.disabled : button.enabled}
           onClick={scrollPrev}
-          disabled={index == 0}
+          disabled={prevBtnDisabled}
         >
           Prev
         </button>
         <button
-          className={index == (players.length - 1) ? button.disabled : button.enabled}
+          className={nextBtnDisabled ? button.disabled : button.enabled}
           onClick={scrollNext}
-          disabled={index == (players.length - 1)}
+          disabled={nextBtnDisabled}
         >
           Next
         </button>
