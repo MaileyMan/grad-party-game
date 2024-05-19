@@ -61,13 +61,13 @@ const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
             <button className="flex bg-white p-2 rounded-md shadow-xl" onClick={startGame}>
               <div className='flex items-center gap-x-1'>
                 <p className='text-md text-gray-700 font-light align-middle'>Start game</p>
-                <img src='/play_arrow.svg' width={25} />
+                <img src='/check_circle.svg' width={25} />
               </div>
             </button>
             <button className="flex bg-white p-2 rounded-md shadow-xl" onClick={leaveGame}>
               <div className='flex items-center gap-x-1'>
                 <p className='text-md text-gray-700 font-light align-middle'>Leave game</p>
-                <img src='/play_arrow.svg' width={25} />
+                <img src='/cancel.svg' width={25} />
               </div>
             </button>
           </div>
@@ -77,8 +77,8 @@ const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
           <div className='flex justify-center'>
             <button className="flex grow-0 shrink min-w-0 bg-white p-2 rounded-md shadow-xl" onClick={leaveGame}>
               <div className='flex items-center gap-x-1'>
-                <p className='text-md text-gray-700 font-light align-middle'>Leave game</p>
-                <img src='/play_arrow.svg' width={25} />
+                <p className='text-md text-gray-700 font-light align-middle'>Cancel</p>
+                <img src='/cancel.svg' width={25} />
               </div>
             </button>
           </div>

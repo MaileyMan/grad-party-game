@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React, { RefObject, SetStateAction } from "react";
 import { SendJsonMessage } from "react-use-websocket/dist/lib/types";
 
 export interface LoginProps {
