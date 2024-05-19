@@ -27,10 +27,9 @@ export const useDimensions = (myRef: any) => {
       setDimensions(getDimensions());
     };
 
-    // use ResizeObserver instead of window events
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(myRef.current);
-    return () => resizeObserver.disconnect(); // disconnect ResizeObserver when component unmounts or if the effect re-runs.
+    return () => resizeObserver.disconnect();
   }, []);
 
   return dimensions;
