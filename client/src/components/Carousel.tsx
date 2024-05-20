@@ -35,7 +35,7 @@ export default function EmblaCarousel({ players }: CarouselProps) {
             players.map((player, i) => (
               <div
                 key={i}
-                className={`${bowlby_one_sc.className} min-w-0 h-24 rounded-md bg-slate-600 content-center text-center font-bold text-lg`}
+                className={`${bowlby_one_sc.className} min-w-0 h-24 rounded-md bg-slate-600 content-center text-center font-bold text-lg text-white`}
                 style={{ flex: "0 0 100%" }}
               >
                 {player.username}
