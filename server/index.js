@@ -34,11 +34,7 @@ const handleMessage = (bytes, uuid) => {
   const message = JSON.parse(bytes.toString())
   const user = users[uuid]
 
-  if (message.received) {
-    connection.close()
-    handleClose(uuid)
-  }
-  else if (message.start && !started) {
+  if (message.start && !started) {
     console.log(`${user.username} has started the game.`)
     broadcastStart()
     timeoutServer()
