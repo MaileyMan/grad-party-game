@@ -4,7 +4,7 @@ import { jsonMessages, LobbyProps } from '@/types'
 import useWebSocket from "react-use-websocket";
 
 const Lobby = ({ username, setJoined, setStarted, setTarget }: LobbyProps) => {
-  const WS_URL = 'ws://34.243.245.176'
+  const WS_URL = 'wss://grad-party-alb-1174178016.eu-west-1.elb.amazonaws.com'
 
   const { sendJsonMessage, lastJsonMessage }: jsonMessages = useWebSocket(WS_URL, {
     queryParams: { username },

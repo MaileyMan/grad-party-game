@@ -4,7 +4,12 @@ import { WebSocketServer } from 'ws'
 import { parse } from 'url'
 import { v4 as uuidv4 } from "uuid"
 
-const server = createServer()
+const server = createServer((_, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Healthy\n');
+});
+
 const wsServer = new WebSocketServer({ server })
 const port = 80
 
